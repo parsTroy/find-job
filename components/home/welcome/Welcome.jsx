@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, TextInput, Pressable, Image, FlatList } from 'react-native'
 import { useRouter } from 'expo-router'
 
 import styles from './welcome.style'
@@ -29,20 +29,20 @@ const Welcome = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={() => { }}>
+        <Pressable style={styles.searchBtn} onPress={() => { }}>
           <Image
             source={icons.search}
             resizeMode='contain'
             style={styles.searchBtnImage}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.tabsContainer}>
         <FlatList
           data={jobTypes}
           renderItem={({ item }) => {
-            <TouchableOpacity
+            <Pressable
               style={styles.tab(activeJobType, item)}
               onPress={() => {
                 setActiveJobType(item);
@@ -50,7 +50,7 @@ const Welcome = () => {
               }}
             >
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
-            </TouchableOpacity>
+            </Pressable>
           }}
           keyExtractor={item => item}
           contentContainerStyle={{ columnGap: SIZES.small }}

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, SafeAreaView } from 'react-native'
+import { View, ScrollView, SafeAreaView } from 'react-native'
 import { useState } from 'react'
 import { Stack, useRouter } from 'expo-router'
 
@@ -7,7 +7,8 @@ import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components
 
 const Home = () => {
 
-    const router = useRouter();
+    const router = useRouter()
+    const [searchTerm, setSearchTerm] = useState("");
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -16,12 +17,12 @@ const Home = () => {
                     headerStyle: { backgroundColor: COLORS.lightWhite },
                     headerShadowVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
+                        <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
                     ),
                     headerRight: () => (
-                        <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
+                        <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
                     ),
-                    headerTitle: ''
+                    headerTitle: "",
                 }}
             />
 
@@ -29,11 +30,17 @@ const Home = () => {
                 <View
                     style={{
                         flex: 1,
-                        padding: SIZES.medium
+                        padding: SIZES.medium,
                     }}
                 >
                     <Welcome
-
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        handleClick={() => {
+                            if (searchTerm) {
+                                router.push(`/search/${searchTerm}`)
+                            }
+                        }}
                     />
 
                     <Popularjobs />
