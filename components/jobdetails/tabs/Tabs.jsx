@@ -1,12 +1,36 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 
 import styles from './tabs.style'
+import { SIZES } from '../../../constants'
+import { FlatList } from 'react-native-web'
 
-const Tabs = () => {
+const TabButton = ({ name, activeTab, onHandleSearchType }) => {
+  <Pressable
+    style={styles.btn(name, activeTab)}
+    onPress={onHandleSearchType}
+  >
+    <Text style={styles.btnText(name, activeTab)}>{name}</Text>
+  </Pressable>
+}
+
+const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
-    <View>
-      <Text>Tabs</Text>
+    <View style={styles.container}>
+      <FlatList
+        data={tabs}
+        renderItem={({ item }) => (
+          <TabButton
+            name={item}
+            activeTab={activeTab}
+            onHandleSearchType={() => setActiveTab(item)}
+          />
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={item => item}
+        contentContainerStyle={{ columnGap: SIZES.small / 2 }}
+      />
     </View>
   )
 }
