@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, FlatList } from 'react-native'
 
 import styles from './tabs.style'
 import { SIZES } from '../../../constants'
-import { FlatList } from 'react-native-web'
 
 const TabButton = ({ name, activeTab, onHandleSearchType }) => {
   <Pressable
